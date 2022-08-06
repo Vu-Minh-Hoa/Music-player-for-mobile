@@ -1,0 +1,230 @@
+const $ = document.querySelector.bind(document);
+const $$ = document.querySelectorAll.bind(document);
+
+const heading = $('header h2');
+const cdThumb = $('.cd-thumb');
+const audio = $('#audio');
+const cd = $('.cd');
+const playBtn = $('.btn-toggle-play');
+const player = $('.player');
+const progress = $('#progress');
+const nextSongBtn = $('.btn-next');
+const prevSongBtn = $('.btn-prev');
+const randomSongBtn = $('.btn-random');
+const app = { 
+    currentIndex: 0,
+    isPlaying: false,
+
+    songs: [
+        { 
+            name: 'Blue tequila', 
+            singer: 'Táo',
+            path: '/audio/Blue Tequila.mp3',
+            image: '/img/Blue tequila.jpg'
+        },
+        { 
+            name: 'Day1', 
+            singer: 'Honne',
+            path: '/audio/HONNE - Day 1.mp3',
+            image: '/img/Honne - day1.jpg'
+        },
+        { 
+            name: 'To the moon', 
+            singer: 'Hooligan',
+            path: '/audio/TO THE MOON.mp3',
+            image: '/img/To the moon.jpg'
+        },
+        { 
+            name: 'In the rain', 
+            singer: 'Hooligan, Kim Kunni',
+            path: '/audio/In The Rain.mp3',
+            image: '/img/In the rain.jpg'
+        },
+        { 
+            name: 'Paris in the rain',  
+            singer: 'Lauv',
+            path: '/audio/Paris In The Rain.mp3',
+            image: '/img/Paris in the rain.jpg'
+        },
+        { 
+            name: 'Comethru', 
+            singer: 'Jeremy Zucker',
+            path: '/audio/Comethru.mp3',
+            image: '/img/Comethru.jpg'
+        },
+        { 
+            name: 'Sunflower', 
+            singer: 'Post Malone, Swae Lee',
+            path: '/audio/Sunflower.mp3',
+            image: '/img/sunflower.jpg'
+        },
+    ],
+
+    
+    render: function () {
+        const htmls = this.songs.map((song) => {
+            return `
+            <div class="song">
+                <div
+                    class="thumb"
+                    style="
+                    background-image: url('${song.image}');
+                "
+                ></div>
+                <div class="body">
+                    <h3 class="title">${song.name}</h3>
+                    <p class="author">${song.singer}</p>
+                </div>
+                <div class="option">
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+            </div>
+            `
+        })
+        $('.play-list').innerHTML = htmls.join('');
+    },
+
+    defineProperties: function() {
+        Object.defineProperty(this, 'currentSong', {
+            get: function () {
+                return this.songs[this.currentIndex];
+            }
+        })
+    },
+
+    handleEvent: function() {
+        const cdWidth = cd.offsetWidth;
+        const _this = this;
+
+        // Change the cd size when user scroll up or down 
+        document.onscroll = function() {
+            const onScroll = window.scrollY || document.documentElement.scrollTop;
+            const newWidth = cdWidth - onScroll;
+
+            cd.style.width = newWidth > 0 ? newWidth + 'px' : 0;
+            cd.style.opacity = newWidth / onScroll;
+        }
+
+        // Cd animation
+        const cdThumbAnimation = cdThumb.animate([
+            { transform: 'rotate(360deg)'}
+        ], {
+            duration: 13000,
+            iterations: Infinity
+        });
+
+        cdThumbAnimation.pause();
+        // Run when the user click play
+        playBtn.onclick = function() {
+            if(_this.isPlaying) 
+            {
+                audio.pause();
+            }
+            else
+            {
+                audio.play();
+            }
+        }
+        
+        // Play song
+        audio.onplay = function() {
+            _this.isPlaying = true;
+            player.classList.add('playing');
+            cdThumbAnimation.play();
+        }
+        
+        // Pause song
+        audio.onpause = function() {
+            _this.isPlaying = false;
+            player.classList.remove('playing');
+            cdThumbAnimation.pause();
+        }
+
+        // Go to next song
+        nextSongBtn.onclick = function() {
+            _this.nextSong();
+            cdThumbAnimation.cancel();
+            audio.play();
+        }
+
+        // Go to previous song
+        prevSongBtn.onclick = function() {
+            _this.prevSong();
+            cdThumbAnimation.cancel();
+            audio.play();
+        }
+
+        randomSongBtn.onclick = function() {
+            _this.playRandomSong();
+
+        }
+
+        audio.ontimeupdate = function() {
+            if(audio.duration)
+            {
+                const progressPercent = Math.floor( audio.currentTime / audio.duration * 100 );
+                progress.value = progressPercent;
+            }
+        }
+
+        progress.onchange = function(e) {
+            const seekCurrentTime = Math.floor( e.target.value * audio.duration / 100 );
+            audio.currentTime = seekCurrentTime;
+        }
+
+    },
+
+    loadCurrentSong: function() {
+        
+        heading.textContent = this.currentSong.name;
+        cdThumb.style.backgroundImage = `url('${this.currentSong.image}')`;
+        audio.src = this.currentSong.path;
+
+    },
+
+    // Go to next song event
+    nextSong: function() {
+            this.currentIndex++; // Go to the next song in the array
+            // Go to the first song when in the last song
+            if( this.currentIndex >= this.songs.length) {
+                this.currentIndex = 0;
+            }
+            this.loadCurrentSong();
+    },
+
+    // Go to previous song event
+    prevSong: function() {
+        this.currentIndex--; // Go to the previous song in the array
+        // Go to the last song when in the first song
+        if( this.currentIndex < 0 ) {
+            this.currentIndex = this.songs.length - 1;
+        }
+
+        this.loadCurrentSong();
+    },
+
+    playRandomSong: function() {
+        let newIndex = 0;
+        do {
+            newIndex = Math.floor(Math.random() * app.songs.length);
+        }
+        while(newIndex === this.currentIndex)
+        console.log(newIndex);
+    },
+
+    start: function () {
+        // Define object properties
+        this.defineProperties();
+        
+        // Listen and handle DOM event
+        this.handleEvent();
+
+        // Load the current song that is playing
+        this.loadCurrentSong();
+
+        // Render the playlist
+        this.render();
+    }
+};
+
+app.start();

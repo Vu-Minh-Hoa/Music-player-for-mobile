@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://127.0.0.1:5500/ -->
+<html lang="en" coupert-item="9AF8D9A4E502F3784AD24272D81F0381"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Music player</title>
+        <link rel="stylesheet" href="./Music player_files/style.css">
+        <link rel="stylesheet" href="./Music player_files/base.css">
+        <link rel="stylesheet" href="./Music player_files/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.gstatic.com/">
+        <link href="./Music player_files/css2" rel="stylesheet">
+    <style>
+        @font-face{
+            font-family: 'Circular'; 
+            font-weight: 400;
+            src: url(chrome-extension://mfidniedemcgceagapgdekdbmanojomk/font/Circular-Pro-Black-Regular.eot);
+            src: url(chrome-extension://mfidniedemcgceagapgdekdbmanojomk/font/Circular-Pro-Black-Regular.eot?#iefix) format('embedded-opentype'),
+                url(chrome-extension://mfidniedemcgceagapgdekdbmanojomk/font/Circular-Pro-Black-Regular.woff2) format('woff2'),
+                url(chrome-extension://mfidniedemcgceagapgdekdbmanojomk/font/Circular-Pro-Black-Regular.woff) format('woff'),
+                url(chrome-extension://mfidniedemcgceagapgdekdbmanojomk/font/Circular-Pro-Black-Regular.ttf) format('truetype'),
+                url(chrome-extension://mfidniedemcgceagapgdekdbmanojomk/font/Circular-Pro-Black-Regular.svg) format('svg');
+        }
+        @font-face{
+            font-family: 'Circular'; 
+            font-weight: 700;
+            src: url(chrome-extension://mfidniedemcgceagapgdekdbmanojomk/font/Circular-Pro-Black-Bold.eot);
+            src: url(chrome-extension://mfidniedemcgceagapgdekdbmanojomk/font/Circular-Pro-Black-Bold.eot?#iefix) format('embedded-opentype'),
+                url(chrome-extension://mfidniedemcgceagapgdekdbmanojomk/font/Circular-Pro-Black-Bold.woff2) format('woff2'),
+                url(chrome-extension://mfidniedemcgceagapgdekdbmanojomk/font/Circular-Pro-Black-Bold.woff) format('woff'),
+                url(chrome-extension://mfidniedemcgceagapgdekdbmanojomk/font/Circular-Pro-Black-Bold.ttf) format('truetype'),
+                url(chrome-extension://mfidniedemcgceagapgdekdbmanojomk/font/Circular-Pro-Black-Bold.svg) format('svg');
+        }
+    </style></head>
+    <body class="" data-new-gr-c-s-check-loaded="14.1043.0" data-gr-ext-installed="">
+        <div class="player">
+            <!-- Dashboard -->
+            <div class="dashboard">
+                <!-- Header -->
+                <header>
+                    <h4>Now playing:</h4>
+                    <h2>Blue tequila</h2>
+                </header>
+
+                <!-- CD -->
+                <div class="cd">
+                    <div class="cd-thumb" style="background-image: url(&quot;/img/Blue tequila.jpg&quot;);"></div>
+                </div>
+
+                <!-- Control -->
+                <div class="control">
+                    <div class="btn btn-repeat">
+                        <i class="fas fa-redo"></i>
+                    </div>
+                    <div class="btn btn-prev">
+                        <i class="fas fa-step-backward"></i>
+                    </div>
+                    <div class="btn btn-toggle-play">
+                        <i class="fas fa-pause icon-pause"></i>
+                        <i class="fas fa-play icon-play"></i>
+                    </div>
+                    <div class="btn btn-next">
+                        <i class="fas fa-step-forward"></i>
+                    </div>
+                    <div class="btn btn-random">
+                        <i class="fas fa-random"></i>
+                    </div>
+                </div>
+
+                <input id="progress" class="progress" type="range" value="0" step="1" min="0" max="100">
+
+                <audio id="audio" src="/audio/Blue Tequila.mp3"></audio>
+            </div>
+
+            <!-- Playlist -->
+            <div class="play-list">
+            <div class="song">
+                <div class="thumb" style="
+                    background-image: url(&#39;/img/Blue tequila.jpg&#39;);
+                "></div>
+                <div class="body">
+                    <h3 class="title">Blue tequila</h3>
+                    <p class="author">Táo</p>
+                </div>
+                <div class="option">
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+            </div>
+            
+            <div class="song">
+                <div class="thumb" style="
+                    background-image: url(&#39;/img/Honne - day1.jpg&#39;);
+                "></div>
+                <div class="body">
+                    <h3 class="title">Day1</h3>
+                    <p class="author">Honne</p>
+                </div>
+                <div class="option">
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+            </div>
+            
+            <div class="song">
+                <div class="thumb" style="
+                    background-image: url(&#39;/img/To the moon.jpg&#39;);
+                "></div>
+                <div class="body">
+                    <h3 class="title">To the moon</h3>
+                    <p class="author">Hooligan</p>
+                </div>
+                <div class="option">
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+            </div>
+            
+            <div class="song">
+                <div class="thumb" style="
+                    background-image: url(&#39;/img/In the rain.jpg&#39;);
+                "></div>
+                <div class="body">
+                    <h3 class="title">In the rain</h3>
+                    <p class="author">Hooligan, Kim Kunni</p>
+                </div>
+                <div class="option">
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+            </div>
+            
+            <div class="song">
+                <div class="thumb" style="
+                    background-image: url(&#39;/img/Paris in the rain.jpg&#39;);
+                "></div>
+                <div class="body">
+                    <h3 class="title">Paris in the rain</h3>
+                    <p class="author">Lauv</p>
+                </div>
+                <div class="option">
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+            </div>
+            
+            <div class="song">
+                <div class="thumb" style="
+                    background-image: url(&#39;/img/Comethru.jpg&#39;);
+                "></div>
+                <div class="body">
+                    <h3 class="title">Comethru</h3>
+                    <p class="author">Jeremy Zucker</p>
+                </div>
+                <div class="option">
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+            </div>
+            
+            <div class="song">
+                <div class="thumb" style="
+                    background-image: url(&#39;/img/sunflower.jpg&#39;);
+                "></div>
+                <div class="body">
+                    <h3 class="title">Sunflower</h3>
+                    <p class="author">Post Malone, Swae Lee</p>
+                </div>
+                <div class="option">
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+            </div>
+            </div>
+        </div>
+    <!-- Code injected by live-server -->
+<script type="text/javascript">
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+    <script src="./Music player_files/main.js.download"></script>
+
+</body><div id="10382466-f405-4f6c-a743-c627c14ed50f" style="all: initial;"></div><div id="93c824af-933c-45bb-b30f-f5c0ccec72db" style="all: initial;"></div><div id="d0303d02-73a2-4fc3-b7d5-658ff61a3ce4" style="all: initial;"></div><div id="b7c3bb28-a9b7-44ee-af3a-3ffdfca9e91b" style="all: initial;"></div><div id="57e452e9-200f-4e47-b472-62364f0f37de" style="all: initial;"></div><div id="bbae4e63-225c-4d10-b33e-a67f7b1694d7" style="all: initial;"></div><div id="d56d3a36-ae64-45fc-bca0-a020c1923e57" style="all: initial;"></div><div id="0b1cbd9f-9e6f-4ee8-a5f7-be319dde9edd" style="all: initial;"></div><div id="a9d698b0-c53a-4367-890f-f7a1c99647a8" style="all: initial;"></div><div id="bfd16d8d-3042-4437-b55d-81d355955051" style="all: initial;"></div><div id="ae85d429-677c-4b48-83ad-0dcf50239edb" style="all: initial;"></div><div id="9a794d33-f45b-4169-bc52-8c7d50e6ac2e" style="all: initial;"></div><div id="39f4c98c-e56f-4df7-84d5-e994e8cb3c2c" style="all: initial;"></div><div id="49bdab99-bdce-4520-9bd7-cafad0be8c36" style="all: initial;"></div><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
